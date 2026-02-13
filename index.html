@@ -1,147 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Be My Valentine 💖</title>
+<title>Valentine 💋</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      text-align: center;
-      background: linear-gradient(to bottom, #ffd6e8, #ffe6f2);
-      font-family: 'Pacifico', cursive;
-      overflow: hidden;
-    }
+<style>
+body{
+  margin:0;
+  background:white;
+  font-family:'Playfair Display', serif;
+  text-align:center;
+  overflow:hidden;
+}
 
-    h1 {
-      font-size: 84px;
-      color: #ff1493;
-      margin-top: 120px;
-      min-height: 120px;
-    }
+/* subtle tiny heart wallpaper */
+body::before{
+  content:"💗 💕 💖 💘 💝 💓 💞";
+  position:fixed;
+  font-size:35px;
+  opacity:0.06;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  pointer-events:none;
+}
 
-    button {
-      padding: 22px 50px;
-      font-size: 32px;
-      border-radius: 18px;
-      border: none;
-      cursor: pointer;
-      position: absolute;
-      display: none;
-    }
+h1{
+  font-size:84px;
+  color:black;
+  margin-top:180px;
+  font-weight:600;
+}
 
-    #yesBtn {
-      background-color: #ff4da6;
-      color: white;
-      left: 25%;
-      top: 65%;
-    }
+.buttons{
+  margin-top:80px;
+}
 
-    #noBtn {
-      background-color: #cccccc;
-      left: 65%;
-      top: 65%;
-    }
+button{
+  font-size:60px;
+  background:none;
+  border:2px solid black;
+  padding:15px 60px;
+  margin:0 80px;
+  cursor:pointer;
+  color:black;
+  transition:0.3s;
+}
 
-    #result {
-      margin-top: 40px;
-      font-size: 42px;
-      color: #ff0066;
-    }
+button:hover{
+  background:black;
+  color:white;
+}
 
-    img {
-      width: 280px;
-      margin-top: 25px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px pink;
-    }
-
-    .heart {
-      position: fixed;
-      top: -10px;
-      color: #ff69b4;
-      font-size: 24px;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      to { transform: translateY(100vh); }
-    }
-  </style>
+#message{
+  font-size:36px;
+  margin-top:60px;
+  color:black;
+}
+</style>
 </head>
 
 <body>
 
-<h1 id="typing"></h1>
+<h1>Will you be my valentine 💋 ?</h1>
 
-<button id="yesBtn" onclick="sayYes()">YES 💕</button>
-<button id="noBtn">NO 😏</button>
+<div class="buttons">
+  <button onclick="yesClick()">Yes</button>
+  <button id="noBtn" onclick="noClick()">No</button>
+</div>
 
-<div id="result"></div>
-
-<audio id="loveMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+<div id="message"></div>
 
 <script>
 
-  const text = "Hey cutie... 💌\nI have something to ask you...\nWill You Be My Valentine? 💖😘😊";
-  const typingElement = document.getElementById("typing");
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
+function noClick(){
+  document.getElementById("noBtn").style.display="none";
+  document.getElementById("message").innerHTML=
+  "nice try , don’t try again";
+}
 
-  let i = 0;
+function yesClick(){
 
-  function typeWriter() {
-    if (i < text.length) {
-      if (text.charAt(i) === "\n") {
-        typingElement.innerHTML += "<br>";
-      } else {
-        typingElement.innerHTML += text.charAt(i);
-      }
-      i++;
-      setTimeout(typeWriter, 50);
-    } else {
-      yesBtn.style.display = "block";
-      noBtn.style.display = "block";
-    }
-  }
-
-  typeWriter();
-
-  // Running NO button
-  noBtn.addEventListener("mouseover", function() {
-    const x = Math.random() * window.innerWidth * 0.8;
-    const y = Math.random() * window.innerHeight * 0.8;
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+  confetti({
+    particleCount:300,
+    spread:120,
+    origin:{y:0.6}
   });
 
-  function sayYes() {
-    document.getElementById("result").innerHTML =
-      "I love you meri Kittu puchi puchi 💖😘<br><img src='yourpic.jpg'>";
-
-    document.getElementById("loveMusic").play();
-
-    confetti({
-      particleCount: 300,
-      spread: 160,
-      origin: { y: 0.6 },
-      colors: ['#ff69b4', '#ff1493', '#ffc0cb']
-    });
-  }
-
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }
-
-  setInterval(createHeart, 250);
+  setTimeout(()=>{
+    window.location.href="love.html";
+  },1500);
+}
 
 </script>
 
