@@ -3,100 +3,145 @@
 <head>
   <title>Be My Valentine 💖</title>
 
-  <!-- Confetti Library -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     body {
+      margin: 0;
       text-align: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #ffd6e8, #ffe6f2);
-      padding-top: 100px;
+      background: linear-gradient(to bottom, #ffd6e8, #ffe6f2);
+      font-family: 'Pacifico', cursive;
       overflow: hidden;
     }
 
     h1 {
-      color: #ff3399;
-      font-size: 35px;
+      font-size: 84px;
+      color: #ff1493;
+      margin-top: 120px;
+      min-height: 120px;
     }
 
     button {
-      padding: 12px 25px;
-      font-size: 18px;
-      border-radius: 12px;
+      padding: 22px 50px;
+      font-size: 32px;
+      border-radius: 18px;
       border: none;
       cursor: pointer;
       position: absolute;
+      display: none;
     }
 
     #yesBtn {
-      background-color: #ff66b2;
+      background-color: #ff4da6;
       color: white;
-      left: 45%;
-      top: 60%;
+      left: 25%;
+      top: 65%;
     }
 
     #noBtn {
       background-color: #cccccc;
-      left: 55%;
-      top: 60%;
+      left: 65%;
+      top: 65%;
     }
 
     #result {
-      margin-top: 50px;
-      font-size: 25px;
-      font-weight: bold;
-      color: #ff1493;
+      margin-top: 40px;
+      font-size: 42px;
+      color: #ff0066;
     }
 
     img {
-      width: 150px;
-      margin: 10px;
-      border-radius: 15px;
+      width: 280px;
+      margin-top: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px pink;
+    }
+
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #ff69b4;
+      font-size: 24px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(100vh); }
     }
   </style>
 </head>
 
 <body>
 
-<h1>Will You Be My Valentine? 💘</h1>
+<h1 id="typing"></h1>
 
-<button id="yesBtn" onclick="sayYes()">Yes 💖</button>
-<button id="noBtn">No 😏</button>
+<button id="yesBtn" onclick="sayYes()">YES 💕</button>
+<button id="noBtn">NO 😏</button>
 
 <div id="result"></div>
 
-<!-- Hidden Music -->
 <audio id="loveMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
 <script>
 
+  const text = "Hey cutie... 💌\nI have something to ask you...\nWill You Be My Valentine? 💖😘😊";
+  const typingElement = document.getElementById("typing");
+  const yesBtn = document.getElementById("yesBtn");
   const noBtn = document.getElementById("noBtn");
 
-  // Make NO button run away
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      if (text.charAt(i) === "\n") {
+        typingElement.innerHTML += "<br>";
+      } else {
+        typingElement.innerHTML += text.charAt(i);
+      }
+      i++;
+      setTimeout(typeWriter, 50);
+    } else {
+      yesBtn.style.display = "block";
+      noBtn.style.display = "block";
+    }
+  }
+
+  typeWriter();
+
+  // Running NO button
   noBtn.addEventListener("mouseover", function() {
     const x = Math.random() * window.innerWidth * 0.8;
     const y = Math.random() * window.innerHeight * 0.8;
-
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
   });
 
   function sayYes() {
     document.getElementById("result").innerHTML =
-      "CONGRATULATIONS 💘🥰 You are her Valentine ❤️<br><br>💑💕🥺💖";
+      "I love you meri Kittu puchi puchi 💖😘<br><img src='yourpic.jpg'>";
 
-    // Play music
     document.getElementById("loveMusic").play();
 
-    // Confetti effect
     confetti({
-      particleCount: 200,
-      spread: 120,
+      particleCount: 300,
+      spread: 160,
       origin: { y: 0.6 },
       colors: ['#ff69b4', '#ff1493', '#ffc0cb']
     });
   }
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+
+  setInterval(createHeart, 250);
 
 </script>
 
