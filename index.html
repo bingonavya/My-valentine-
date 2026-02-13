@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Be My Valentine 💖</title>
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ffd6e8, #ffe6f2);
+      padding-top: 100px;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #ff3399;
+      font-size: 35px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yesBtn {
+      background-color: #ff66b2;
+      color: white;
+      left: 45%;
+      top: 60%;
+    }
+
+    #noBtn {
+      background-color: #cccccc;
+      left: 55%;
+      top: 60%;
+    }
+
+    #result {
+      margin-top: 50px;
+      font-size: 25px;
+      font-weight: bold;
+      color: #ff1493;
+    }
+
+    img {
+      width: 150px;
+      margin: 10px;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Will You Be My Valentine? 💘</h1>
+
+<button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+<button id="noBtn">No 😏</button>
+
+<div id="result"></div>
+
+<!-- Hidden Music -->
+<audio id="loveMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+<script>
+
+  const noBtn = document.getElementById("noBtn");
+
+  // Make NO button run away
+  noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * window.innerWidth * 0.8;
+    const y = Math.random() * window.innerHeight * 0.8;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  function sayYes() {
+    document.getElementById("result").innerHTML =
+      "CONGRATULATIONS 💘🥰 You are her Valentine ❤️<br><br>💑💕🥺💖";
+
+    // Play music
+    document.getElementById("loveMusic").play();
+
+    // Confetti effect
+    confetti({
+      particleCount: 200,
+      spread: 120,
+      origin: { y: 0.6 },
+      colors: ['#ff69b4', '#ff1493', '#ffc0cb']
+    });
+  }
+
+</script>
+
+</body>
+</html>
