@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Valentine</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:#c4002f; /* red wallpaper */
+  color:black;
+  text-align:center;
+  font-family:Arial, sans-serif;
+  overflow:hidden;
+}
+
+#mainPage, #rotatePage, #lovePage{
+  display:none;
+}
+
+.active{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+/* FIRST PAGE */
+.smallText{
+  font-size:18px;
+}
+
+.bigValentine{
+  font-size:60px;
+  font-family:'Playfair Display', serif;
+  margin-bottom:40px;
+}
+
+button{
+  font-size:18px;
+  padding:10px 30px;
+  margin:10px;
+  background:none;
+  border:2px solid black;
+  cursor:pointer;
+  color:black;
+}
+
+#noMessage{
+  font-size:18px;
+  margin-top:20px;
+}
+
+/* ROTATE PAGE */
+.rotateText{
+  font-size:84px;
+}
+
+/* LOVE PAGE (ROTATED LEFT) */
+.loveContainer{
+  transform:rotate(-90deg);
+}
+
+.loveTitle{
+  font-size:60pt;
+  font-family:'Playfair Display', serif;
+}
+
+.loveNote{
+  font-size:30pt;
+  margin-top:20px;
+  font-family:'Playfair Display', serif;
+}
+
+img{
+  margin-top:30px;
+  max-width:300px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FIRST PAGE -->
+<div id="mainPage" class="active">
+  <div class="smallText">Will you be my</div>
+  <div class="bigValentine">VALENTINE</div>
+
+  <div>
+    <button onclick="yesClick()">Yes</button>
+    <button id="noBtn" onclick="noClick()">No</button>
+  </div>
+
+  <div id="noMessage"></div>
+</div>
+
+<!-- ROTATE PAGE -->
+<div id="rotatePage">
+  <div class="rotateText">rotate your phone to left</div>
+</div>
+
+<!-- LOVE PAGE -->
+<div id="lovePage">
+  <div class="loveContainer">
+    <div class="loveTitle">I LOVE YOU MY BABY</div>
+    <div class="loveNote">Happy Valentine’s Day, my love.
+Being with you feels like my safest place and my happiest adventure at the same time. You make my ordinary days feel special just by existing in them. I’m so grateful for your hugs, your laugh, your silly jokes, and the way you care for me.
+I choose you today and always. 💋</div>
+
+  </div>
+</div>
+
+<script>
+
+function noClick(){
+  document.getElementById("noBtn").style.display="none";
+  document.getElementById("noMessage").innerHTML="nice try , don’t try again";
+}
+
+function yesClick(){
+
+  confetti({
+    particleCount:300,
+    spread:120,
+    origin:{y:0.6}
+  });
+
+  setTimeout(()=>{
+    document.getElementById("mainPage").classList.remove("active");
+    document.getElementById("rotatePage").classList.add("active");
+
+    setTimeout(()=>{
+      document.getElementById("rotatePage").classList.remove("active");
+      document.getElementById("lovePage").classList.add("active");
+    },3000);
+
+  },1500);
+}
+
+</script>
+
+</body>
+</html>
