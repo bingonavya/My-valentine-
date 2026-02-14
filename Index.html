@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Valentine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:#c4002f;
+  color:black;
+  text-align:center;
+  font-family:Arial, sans-serif;
+}
+
+/* Hide pages */
+#rotatePage, #lovePage{
+  display:none;
+}
+
+.smallText{
+  font-size:18px;
+}
+
+.bigValentine{
+  font-size:60px;
+  font-family:'Playfair Display', serif;
+  margin-bottom:30px;
+}
+
+button{
+  font-size:18px;
+  padding:10px 30px;
+  margin:10px;
+  background:none;
+  border:2px solid black;
+  cursor:pointer;
+}
+
+#noMessage{
+  font-size:18px;
+  margin-top:20px;
+}
+
+.rotateText{
+  font-size:84px;
+}
+
+.loveTitle{
+  font-size:60pt;
+  font-family:'Playfair Display', serif;
+}
+
+.loveNote{
+  font-size:30pt;
+  margin-top:20px;
+  font-family:'Playfair Display', serif;
+}
+
+.loveContainer{
+  transform:rotate(-90deg);
+}
+
+img{
+  margin-top:30px;
+  max-width:300px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST PAGE -->
+<div id="mainPage">
+  <div class="smallText">Will you be my</div>
+  <div class="bigValentine">GALENTINE</div>
+
+  <button onclick="yesClick()">Yes</button>
+  <button id="noBtn" onclick="noClick()">No</button>
+
+  <div id="noMessage"></div>
+</div>
+
+<!-- ROTATE PAGE -->
+<div id="rotatePage">
+  <div class="rotateText">rotate your phone to left my love</div>
+</div>
+
+<!-- LOVE PAGE -->
+<div id="lovePage">
+  <div class="loveContainer">
+    <div class="loveTitle">FOR MY BESTFRIEND AKA LOVE</div>
+    <div class="loveNote">“
+I just wanted to tell you how much you mean to me. You’re the one who gets my weird jokes, understands me when no one else does, and always knows how to make me smile. Life wouldn’t be half as fun without you in it!
+
+Thanks for being my partner in crime, my shoulder to lean on, and my forever cheerleader. You’re not just my best friend—you’re family I got to choose. 🥰
+
+Love always,
+chiu”</div>
+  </div>
+</div>
+
+<script>
+function noClick(){
+  document.getElementById("noBtn").style.display="none";
+  document.getElementById("noMessage").innerHTML="do you not love me?";
+}
+
+function yesClick(){
+
+  confetti({
+    particleCount:300,
+    spread:120,
+    origin:{y:0.6}
+  });
+
+  setTimeout(()=>{
+    document.getElementById("mainPage").style.display="none";
+    document.getElementById("rotatePage").style.display="flex";
+
+    setTimeout(()=>{
+      document.getElementById("rotatePage").style.display="none";
+      document.getElementById("lovePage").style.display="flex";
+    },3000);
+
+  },1500);
+}
+</script>
+
+</body>
+</html>
 
